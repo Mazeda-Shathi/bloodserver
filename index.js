@@ -69,32 +69,6 @@ app.post('/request', (req, res) => {
         console.log(err);
     })
 })
-//update process date
-// app.put('/request', (req, res) => {
-//     console.log(err);
-//     const { date, email } = req.query
-//     const Pquery = "UPDATE patient SET processDate=? WHERE email=?"
-//     db.query(Pquery, [date, email], (err, result) => {
-//         res.json(err ? err : result);
-
-//     })
-
-// })
-// app.get('/history', (req, res) => {
-//     const getHistory = "SELECT * FROM patient WHERE processDate is NOT NULL";
-//     db.query(getHistory, (err, result) => {
-//         res.json(err ? err : result)
-//     })
-// })
-//delete patient
-// app.delete('/request/:email', (req, res) => {
-//     const { email } = req.params;
-//     const deleteRequest = "DELETE patient  WHERE email = ?";
-//     db.query(deleteRequest, [email], (err, result) => {
-//         res.json(err ? err : result)
-
-//     })
-// })
 
 //get for donor profile
 app.get('/donors/:email', (req, res) => {
