@@ -26,7 +26,7 @@ app.post('/donors', (req, res) => {
     const data = req.body;
     console.log(data);
     const { name, gender, date, bloodGroup, street, area, upozila, zila, phone, email, password } = data;
-    const insertQ = "INSERT INTO donor (name, gender,dob, bloodgroup, street,area,upozila,zila, phone, email, password ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";//column wise dynamic value insertion
+    const insertQ = "INSERT INTO donor (name, gender,dob, bloodgroup, street,area,upozila,zila, phone, donor_email, password ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";//column wise dynamic value insertion
     db.query(insertQ, [name, gender, date, bloodGroup, street, area, upozila, zila, phone, email, password], (err, result) => {
         res.json(err ? err : result)
 
@@ -63,7 +63,7 @@ app.post('/request', (req, res) => {
     const data = req.body;
     console.log(data);
     const { name, age, gender, bloodgroup, bloodNeededDate, upozila, zila, medical_name, medical_area, medical_upozila, phone, email } = data;
-    const insertQ = "INSERT INTO patient (name, age, gender, bloodgroup,bloodNeededDate,upozila,zila,medical_name, medical_area,medical_upozila, phone, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+    const insertQ = "INSERT INTO patient (name, age, gender, bloodgroup,bloodNeededDate,upozila,zila,medical_name, medical_area,medical_upozila, phone, patient_email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
     db.query(insertQ, [name, age, gender, bloodgroup, bloodNeededDate, upozila, zila, medical_name, medical_area, medical_upozila, phone, email], (err, result) => {
         res.json(err ? err : result);
         console.log(err);
@@ -100,7 +100,7 @@ app.post('/request', (req, res) => {
 app.get('/donors/:email', (req, res) => {
 
     const { email } = req.params;
-    const emailQuery = `SELECT * FROM donor WHERE email= ?`;
+    const emailQuery = `SELECT * FROM donor WHERE donor_email= ?`;
     db.query(emailQuery, [email], (err, result) => {
         res.json(err ? err : result);
     })
@@ -131,7 +131,7 @@ app.post('/donationUpdate', (req, res) => {
 app.delete('/donationUpdate/:email', (req, res) => {
     const { email } = req.params
     console.log('htting', email);
-    const deleteData = "DELETE  from patient where email=?"
+    const deleteData = "DELETE  from patient where patient_email=?"
     db.query(deleteData, [email], (err, result) => {
         res.json(err ? err : result)
     })
@@ -164,7 +164,7 @@ app.put('/updateProfile/:email', (req, res) => {
 
     const { name, street, area, upozila, zila, phone } = req.body
     console.log(email);
-    const Pquery = "UPDATE donor SET name=?, street=?, area=?, upozila=?, zila=?, phone=?  WHERE email=?"
+    const Pquery = "UPDATE donor SET name=?, street=?, area=?, upozila=?, zila=?, phone=?  WHERE donor_email=?"
     db.query(Pquery, [name, street, area, upozila, zila, phone, email], (err, result) => {
         res.json(err ? err : result)
         console.log(err);
