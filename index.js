@@ -35,8 +35,8 @@ app.post('/donors', (req, res) => {
 
 //get API for bloodRequest 
 app.get('/request', (req, res) => {
-    const getRequest = "select * from patient where deleted = ? ORDER BY bloodNeededDate DESC";
-    db.query(getRequest, "", (err, result) => {
+    const getRequest = "select * from patient   ORDER BY bloodNeededDate DESC";
+    db.query(getRequest, (err, result) => {
         res.json(result);
     })
 
@@ -62,9 +62,9 @@ app.get('/users/:email', (req, res) => {
 app.post('/request', (req, res) => {
     const data = req.body;
     console.log(data);
-    const { name, age, gender, bloodgroup, bloodNeededDate, upozila, zila, medical_name, medical_area, medical_upozila, bloodAmount, phone, email } = data;
-    const insertQ = "INSERT INTO patient (name, age, gender, bloodgroup,bloodNeededDate,upozila,zila,medical_name, medical_area,medical_upozila,bloodAmount, phone, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
-    db.query(insertQ, [name, age, gender, bloodgroup, bloodNeededDate, upozila, zila, medical_name, medical_area, medical_upozila, bloodAmount, phone, email], (err, result) => {
+    const { name, age, gender, bloodgroup, bloodNeededDate, upozila, zila, medical_name, medical_area, medical_upozila, phone, email } = data;
+    const insertQ = "INSERT INTO patient (name, age, gender, bloodgroup,bloodNeededDate,upozila,zila,medical_name, medical_area,medical_upozila, phone, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+    db.query(insertQ, [name, age, gender, bloodgroup, bloodNeededDate, upozila, zila, medical_name, medical_area, medical_upozila, phone, email], (err, result) => {
         res.json(err ? err : result);
         console.log(err);
     })
@@ -87,14 +87,14 @@ app.post('/request', (req, res) => {
 //     })
 // })
 //delete patient
-app.delete('/request/:id', (req, res) => {
-    const { id } = req.params;
-    const deleteRequest = "UPDATE patient SET deleted= ? WHERE id = ?";
-    db.query(deleteRequest, ["delete", id], (err, result) => {
-        res.json(err ? err : result)
+// app.delete('/request/:email', (req, res) => {
+//     const { email } = req.params;
+//     const deleteRequest = "DELETE patient  WHERE email = ?";
+//     db.query(deleteRequest, [email], (err, result) => {
+//         res.json(err ? err : result)
 
-    })
-})
+//     })
+// })
 
 //get for donor profile
 app.get('/donors/:email', (req, res) => {
@@ -139,7 +139,7 @@ app.delete('/donationUpdate/:email', (req, res) => {
 
 //get api for update donation
 app.get('/donationUpdate', (req, res) => {
-    const getQuery = "select * from donation";
+    const getQuery = "select * from donation ORDER BY donation_date DESC";
     db.query(getQuery, (err, result) => {
         res.json(result);
     })
