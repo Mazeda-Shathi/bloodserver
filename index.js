@@ -8,10 +8,10 @@ app.use(express.json());
 
 const mysql = require('mysql');
 const db = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'bloodservice'
+    host: 'sql4.freemysqlhosting.net',
+    user: 'sql4462469',
+    password: 'tlvfq5GS71',
+    database: 'sql4462469'
 })
 
 //get API for donors
@@ -101,7 +101,7 @@ app.post('/donationUpdate', (req, res) => {
     })
 
 })
-//
+//delete patient
 app.delete('/donationUpdate/:email', (req, res) => {
     const { email } = req.params
     console.log('htting', email);
