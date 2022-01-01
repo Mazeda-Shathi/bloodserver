@@ -2,7 +2,7 @@ const express = require("express")
 const app = express();
 const cors = require('cors');
 app.use(cors());
-const port = 3001;
+const port = 3001 || process.env.PORT;
 app.use(express.json());
 
 
@@ -35,7 +35,7 @@ app.post('/donors', (req, res) => {
 
 //get API for bloodRequest 
 app.get('/request', (req, res) => {
-    const getRequest = "select * from patient   ORDER BY bloodNeededDate DESC";
+    const getRequest = "select * from patient ORDER BY bloodNeededDate DESC";
     db.query(getRequest, (err, result) => {
         res.json(result);
     })
