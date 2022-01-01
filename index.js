@@ -153,6 +153,6 @@ app.put('/updateProfile/:email', (req, res) => {
 app.get("/", (req, res) => {
     res.send("konika organization")
 })
-app.listen(3001, () => {
+app.listen(port, () => {
     console.log("running on port 3001");
 })
