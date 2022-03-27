@@ -8,10 +8,15 @@ app.use(express.json());
 
 const mysql = require('mysql');
 const db = mysql.createPool({
-    host: 'sql4.freemysqlhosting.net',
-    user: 'sql4462469',
-    password: 'tlvfq5GS71',
-    database: 'sql4462469'
+    // host: 'sql4.freemysqlhosting.net',
+    // user: 'sql4462469',
+    // password: 'tlvfq5GS71',
+    // database: 'sql4462469'
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'bloodservice'
+
 })
 
 //get API for donors
